@@ -7,3 +7,4 @@ example/android/.gradle/
 example/.watchmanconfig
 example/.flowconfig
 example/.buckconfig
+.project

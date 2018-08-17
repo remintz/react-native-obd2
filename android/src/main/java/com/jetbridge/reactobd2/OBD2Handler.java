@@ -71,13 +71,15 @@ public class OBD2Handler implements ObdProgressListener {
 
   private boolean mIsServiceBound;
   private AbstractGatewayService service;
+
+  private int samplePeriod = 1000;
   private final Runnable mQueueCommands = new Runnable() {
     public void run() {
       if (service != null && service.isRunning() && service.queueEmpty()) {
         queueCommands();
       }
       // run again in period defined in preferences
-      new Handler().postDelayed(mQueueCommands, 1000);
+      new Handler().postDelayed(mQueueCommands, samplePeriod);
     }
   };
 
@@ -144,6 +146,11 @@ public class OBD2Handler implements ObdProgressListener {
   }
 
   public void startLiveData() {
+     startLiveData(1000);
+  }
+  
+  public void startLiveData(int period) {
+    samplePeriod = period;
     doBindService();
 
     // start command execution
