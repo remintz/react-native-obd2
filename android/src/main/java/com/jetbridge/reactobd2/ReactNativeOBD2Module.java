@@ -104,7 +104,6 @@ public class ReactNativeOBD2Module extends ReactContextBaseJavaModule {
     if (mOBD2Handler == null) {
       mOBD2Handler = new OBD2Handler(mReactContext);
     }
-
     mOBD2Handler.setMockUpMode(enabled);
   }
 
@@ -113,17 +112,15 @@ public class ReactNativeOBD2Module extends ReactContextBaseJavaModule {
      if (mOBD2Handler == null) {
       mOBD2Handler = new OBD2Handler(mReactContext);
     }
-
     mOBD2Handler.setRemoteDeviceName(remoteDeviceAddress);
   }
 
   @ReactMethod
-  public void startLiveData() {
+  public void startLiveData(int period) {
     if (mOBD2Handler == null) {
       mOBD2Handler = new OBD2Handler(mReactContext);
     }
-
-    mOBD2Handler.startLiveData();
+    mOBD2Handler.startLiveData(period);
   }
 
   @ReactMethod
@@ -131,7 +128,6 @@ public class ReactNativeOBD2Module extends ReactContextBaseJavaModule {
     if (mOBD2Handler == null) {
       mOBD2Handler = new OBD2Handler(mReactContext);
     }
-
     mOBD2Handler.stopLiveData();
   }
 }

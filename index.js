@@ -11,29 +11,33 @@
 const jetbridge_obd2 = require('react-native').NativeModules.JetBridge_OBDII;
 
 class react_obd2 {
-  constructor() {
-  }
+   constructor() {
+   }
 
-  ready() {
-    jetbridge_obd2.ready();
-  }
+   ready() {
+      jetbridge_obd2.ready();
+   }
 
-  getBluetoothDeviceNameList() {
-    return jetbridge_obd2.getBluetoothDeviceName();
-  }
+   getBluetoothDeviceNameList() {
+      return jetbridge_obd2.getBluetoothDeviceName();
+   }
 
-  setMockUpMode(aEnabled) {
-    jetbridge_obd2.setMockUpMode(aEnabled);
-  }
+   setMockUpMode(aEnabled) {
+      jetbridge_obd2.setMockUpMode(aEnabled);
+   }
 
-  startLiveData(aDeviceAddress) {
-    jetbridge_obd2.setRemoteDeviceAddress(aDeviceAddress);
-    jetbridge_obd2.startLiveData();
-  }
+   setRemoteDeviceAddress(aDeviceAddress) {
+      jetbridge_obd2.setRemoteDeviceAddress(aDeviceAddress);
+   }
 
-  stopLiveData() {
-    return jetbridge_obd2.stopLiveData();
-  }
+   startLiveData(period) {
+      var thePeriod = typeof period !== 'undefined' ? period : 1000;
+      jetbridge_obd2.startLiveData(thePeriod);
+   }
+
+   stopLiveData() {
+      return jetbridge_obd2.stopLiveData();
+   }
 }
 
 module.exports = new react_obd2();

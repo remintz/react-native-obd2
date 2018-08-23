@@ -8,3 +8,4 @@ example/.watchmanconfig
 example/.flowconfig
 example/.buckconfig
 .project
+*.class

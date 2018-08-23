@@ -150,7 +150,8 @@ public class OBD2Handler implements ObdProgressListener {
   }
   
   public void startLiveData(int period) {
-    samplePeriod = period;
+   Log.d(TAG, "Stopping live data.." + period);
+   samplePeriod = period;
     doBindService();
 
     // start command execution
