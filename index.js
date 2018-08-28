@@ -38,6 +38,10 @@ class react_obd2 {
    stopLiveData() {
       return jetbridge_obd2.stopLiveData();
    }
+
+   getQueueSize() {
+      return jetbridge_obd2.getQueueSize();
+   }
 }
 
 module.exports = new react_obd2();

@@ -82,6 +82,12 @@ public abstract class AbstractGatewayService extends Service {
         }
     }
 
+    public int getQueueSize() {
+       int sz = jobsQueue.size();
+       Log.d(TAG, "Queue size: " + sz);
+       return sz;
+    }
+
     /**
      * Show a notification while this service is running.
      */

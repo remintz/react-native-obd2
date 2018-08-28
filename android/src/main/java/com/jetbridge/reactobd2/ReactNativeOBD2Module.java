@@ -49,85 +49,98 @@ import java.util.Map;
 import java.util.Set;
 
 public class ReactNativeOBD2Module extends ReactContextBaseJavaModule {
-  private final static String TAG = "ReactOBD2Module";
-  private OBD2Handler mOBD2Handler = null;
-  private ReactContext mReactContext = null;
-  private Arguments mArguments;
+   private final static String TAG = "ReactOBD2Module";
+   private OBD2Handler mOBD2Handler = null;
+   private ReactContext mReactContext = null;
+   private Arguments mArguments;
 
-  public ReactNativeOBD2Module(ReactApplicationContext reactContext) {
-    super(reactContext);
-    mReactContext = reactContext;
-  }
+   public ReactNativeOBD2Module(ReactApplicationContext reactContext) {
+      super(reactContext);
+      mReactContext = reactContext;
+   }
 
-  @Override
-  public String getName() {
-    return "JetBridge_OBDII";
-  }
+   @Override
+   public String getName() {
+      return "JetBridge_OBDII";
+   }
 
-
-  @ReactMethod
-  public void ready() {
-    if (mOBD2Handler == null) {
-      mOBD2Handler = new OBD2Handler(mReactContext);
-    }
-
-    mOBD2Handler.ready();
-  }
-
-  @ReactMethod
-  public void getBluetoothDeviceName(Promise aPromise) {
-    if (mOBD2Handler == null) {
-      mOBD2Handler = new OBD2Handler(mReactContext);
-    }
-
-    try {
-      Set<BluetoothDevice> pairedDevices = mOBD2Handler.getBondedDevices();
-      WritableArray deviceList = mArguments.createArray();
-      if (pairedDevices.size() > 0) {
-        for (BluetoothDevice device : pairedDevices) {
-          WritableMap map = mArguments.createMap();
-          map.putString("name", device.getName());
-          map.putString("address", device.getAddress());
-          deviceList.pushMap(map);
-        }
+   @ReactMethod
+   public void ready() {
+      if (mOBD2Handler == null) {
+         mOBD2Handler = new OBD2Handler(mReactContext);
       }
 
-      aPromise.resolve(deviceList);
-    } catch (IOException e) {
-      e.printStackTrace();
-      aPromise.reject(TAG, e);
-    }
-  }
+      mOBD2Handler.ready();
+   }
 
-  @ReactMethod
-  public void setMockUpMode(boolean enabled) {
-    if (mOBD2Handler == null) {
-      mOBD2Handler = new OBD2Handler(mReactContext);
-    }
-    mOBD2Handler.setMockUpMode(enabled);
-  }
+   @ReactMethod
+   public void getBluetoothDeviceName(Promise aPromise) {
+      if (mOBD2Handler == null) {
+         mOBD2Handler = new OBD2Handler(mReactContext);
+      }
 
-  @ReactMethod
-  public void setRemoteDeviceAddress(String remoteDeviceAddress) {
-     if (mOBD2Handler == null) {
-      mOBD2Handler = new OBD2Handler(mReactContext);
-    }
-    mOBD2Handler.setRemoteDeviceName(remoteDeviceAddress);
-  }
+      try {
+         Set<BluetoothDevice> pairedDevices = mOBD2Handler.getBondedDevices();
+         WritableArray deviceList = mArguments.createArray();
+         if (pairedDevices.size() > 0) {
+            for (BluetoothDevice device : pairedDevices) {
+               WritableMap map = mArguments.createMap();
+               map.putString("name", device.getName());
+               map.putString("address", device.getAddress());
+               deviceList.pushMap(map);
+            }
+         }
 
-  @ReactMethod
-  public void startLiveData(int period) {
-    if (mOBD2Handler == null) {
-      mOBD2Handler = new OBD2Handler(mReactContext);
-    }
-    mOBD2Handler.startLiveData(period);
-  }
+         aPromise.resolve(deviceList);
+      } catch (IOException e) {
+         e.printStackTrace();
+         aPromise.reject(TAG, e);
+      }
+   }
 
-  @ReactMethod
-  public void stopLiveData() {
-    if (mOBD2Handler == null) {
-      mOBD2Handler = new OBD2Handler(mReactContext);
-    }
-    mOBD2Handler.stopLiveData();
-  }
+   @ReactMethod
+   public void setMockUpMode(boolean enabled) {
+      if (mOBD2Handler == null) {
+         mOBD2Handler = new OBD2Handler(mReactContext);
+      }
+      mOBD2Handler.setMockUpMode(enabled);
+   }
+
+   @ReactMethod
+   public void setRemoteDeviceAddress(String remoteDeviceAddress) {
+      if (mOBD2Handler == null) {
+         mOBD2Handler = new OBD2Handler(mReactContext);
+      }
+      mOBD2Handler.setRemoteDeviceName(remoteDeviceAddress);
+   }
+
+   @ReactMethod
+   public void startLiveData(int period) {
+      if (mOBD2Handler == null) {
+         mOBD2Handler = new OBD2Handler(mReactContext);
+      }
+      mOBD2Handler.startLiveData(period);
+   }
+
+   @ReactMethod
+   public void stopLiveData() {
+      if (mOBD2Handler == null) {
+         mOBD2Handler = new OBD2Handler(mReactContext);
+      }
+      mOBD2Handler.stopLiveData();
+   }
+
+   @ReactMethod
+   public void getQueueSize(Promise aPromise) {
+      if (mOBD2Handler == null) {
+         mOBD2Handler = new OBD2Handler(mReactContext);
+      }
+      try {
+         int qsz = mOBD2Handler.getQueueSize();
+         aPromise.resolve(qsz);
+      } catch (Exception e) {
+         e.printStackTrace();
+         aPromise.reject(TAG, e);
+      }
+   }
 }

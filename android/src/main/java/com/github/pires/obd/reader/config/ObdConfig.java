@@ -90,4 +90,113 @@ public final class ObdConfig {
         return cmds;
     }
 
+
+    public static ArrayList<ObdCommand> getCommands1sec() {
+      ArrayList<ObdCommand> cmds = new ArrayList<>();
+
+      // Control
+      cmds.add(new TimingAdvanceCommand());
+
+      // Engine
+      cmds.add(new LoadCommand());
+      cmds.add(new RPMCommand());
+      cmds.add(new ThrottlePositionCommand());
+
+      // Fuel
+
+      // Pressure
+      cmds.add(new FuelPressureCommand());
+      cmds.add(new FuelRailPressureCommand());
+      cmds.add(new IntakeManifoldPressureCommand());
+
+      // Temperature
+
+      // Misc
+      cmds.add(new SpeedCommand());
+
+
+      return cmds;
+  }
+
+  public static ArrayList<ObdCommand> getCommands5sec() {
+   ArrayList<ObdCommand> cmds = new ArrayList<>();
+
+   // Control
+   cmds.add(new EquivalentRatioCommand());
+
+   // Engine
+   cmds.add(new MassAirFlowCommand());
+
+   // Fuel
+   cmds.add(new AirFuelRatioCommand());
+   cmds.add(new WidebandAirFuelRatioCommand());
+   cmds.add(new FuelTrimCommand(FuelTrim.LONG_TERM_BANK_1));
+   cmds.add(new FuelTrimCommand(FuelTrim.LONG_TERM_BANK_2));
+   cmds.add(new FuelTrimCommand(FuelTrim.SHORT_TERM_BANK_1));
+   cmds.add(new FuelTrimCommand(FuelTrim.SHORT_TERM_BANK_2));
+   cmds.add(new ConsumptionRateCommand());
+
+   // Pressure
+
+   // Temperature
+
+   // Misc
+   return cmds;
+}
+
+public static ArrayList<ObdCommand> getCommands10sec() {
+   ArrayList<ObdCommand> cmds = new ArrayList<>();
+
+   // Control
+    cmds.add(new ModuleVoltageCommand());
+
+   // Engine
+
+   // Fuel
+      cmds.add(new FuelLevelCommand());
+
+   // Pressure
+
+   // Temperature
+
+   return cmds;
+}
+
+public static ArrayList<ObdCommand> getCommands60sec() {
+   ArrayList<ObdCommand> cmds = new ArrayList<>();
+
+   // Control
+      cmds.add(new DtcNumberCommand());
+      cmds.add(new DistanceMILOnCommand());
+      cmds.add(new TroubleCodesCommand());
+
+   // Engine
+      cmds.add(new RuntimeCommand());
+
+   // Fuel
+      cmds.add(new OilTempCommand());
+
+   // Pressure
+      cmds.add(new BarometricPressureCommand());
+
+   // Temperature
+      cmds.add(new AirIntakeTemperatureCommand());
+      cmds.add(new AmbientAirTemperatureCommand());
+      cmds.add(new EngineCoolantTemperatureCommand());
+
+   return cmds;
+}
+
+public static ArrayList<ObdCommand> getCommands600sec() {
+   ArrayList<ObdCommand> cmds = new ArrayList<>();
+
+   // Control
+      cmds.add(new VinCommand());
+
+   // Fuel
+      cmds.add(new FindFuelTypeCommand());
+
+   return cmds;
+}
+
 }

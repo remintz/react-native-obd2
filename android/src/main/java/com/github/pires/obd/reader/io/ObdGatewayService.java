@@ -50,8 +50,6 @@ public class ObdGatewayService extends AbstractGatewayService {
 
 //        final String remoteDevice = prefs.getString("bluetooth_list_preference", null);
         if (remoteDevice == null || "".equals(remoteDevice)) {
-//            Toast.makeText(ctx, getString(R.string.text_bluetooth_nodevice), Toast.LENGTH_LONG).show();
-
             // log error
             Log.e(TAG, "No Bluetooth device has been selected.");
 
