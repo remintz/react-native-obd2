@@ -287,6 +287,9 @@ public class OBD2Handler implements ObdProgressListener {
    public void stateUpdate(ObdCommandJob job) {
       final String cmdName = job.getCommand().getName();
       String cmdResult = "";
+      String cmdResultValue = "";
+      String cmdResultUnit = "";
+
       final String cmdID = LookUpCommand(cmdName);
 
       if (job.getState().equals(ObdCommandJob.ObdCommandJobState.EXECUTION_ERROR)) {
@@ -302,6 +305,8 @@ public class OBD2Handler implements ObdProgressListener {
          cmdResult = "N/A";
       } else {
          cmdResult = job.getCommand().getFormattedResult();
+         cmdResultValue = job.getCommand().getCalculatedResult();
+         cmdResultUnit = job.getCommand().getResultUnit();
          if (mIsServiceBound) {
             sendDeviceStatus(EVENTNAME_OBD_STATUS, "receiving");
          }
@@ -318,6 +323,8 @@ public class OBD2Handler implements ObdProgressListener {
       map.putString("cmdID", cmdID);
       map.putString("cmdName", cmdName);
       map.putString("cmdResult", cmdResult);
+      map.putString("cmdResultValue", cmdResultValue);
+      map.putString("cmdResultUnit", cmdResultUnit);
       sendEvent(EVENTNAME_OBD2_DATA, map);
    }
 
